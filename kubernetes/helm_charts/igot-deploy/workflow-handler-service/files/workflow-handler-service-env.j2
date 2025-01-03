@@ -155,6 +155,6 @@ spring.db2.datasource.jdbcUrl=jdbc:postgresql://{{ postgresql_host }}:{{ postgre
 spring.db2.datasource.username={{postgresql_username_sunbird }}
 spring.db2.datasource.password={{ postgresql_password_sunbird }}
 
-kafka.topics.workflow.request.v2=workflowContentTopicV2
-kafka.topics.workflow.notification.v2=workflowNotificationTopicV2
+kafka.topics.workflow.request.v2={{ env }}.workflowContentTopicV2
+kafka.topics.workflow.notification.v2={{ env }}.workflowNotificationTopicV2
 
