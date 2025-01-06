@@ -19220,7 +19220,7 @@ kong_apis:
 
   - name: communityCategorySearch
     uris: "{{ community_prefix }}/subcategory/list"
-    upstream_url: "{{ cb_community_service_url }}/community/subcategory/list"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/subcategory/list"
     strip_uri: true
     plugins:
       - name: jwt
