@@ -14202,7 +14202,7 @@ kong_apis:
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
         
   - name: mentorProfileReadInterfaced
-    uris: "{{ mentoring_interface_service_url }}/v1/profile/read"
+    uris: "{{ mentoring_interface_prefix }}/v1/profile/read"
     upstream_url: "{{ mentoring_interface_service_url }}/interface/v1/profile/read"
     strip_uri: true
     plugins:
@@ -14261,8 +14261,8 @@ kong_apis:
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
         
   - name: mentorProfileDetailsInterface
-    uris: "{{ mentoring_interface_service_url }}/v1/mentors/details"
-    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/mentors/details"
+    uris: "{{ mentoring_interface_prefix }}/v1/mentors/details"
+    upstream_url: "{{ mentoring_interface_service_url }}/interface/v1/mentors/details"
     strip_uri: true
     plugins:
       - name: jwt
@@ -19056,6 +19056,114 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
+  - name: communityCategoryCreate
+    uris: "{{ community_prefix }}/category/create"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/category/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: communityCategoryUpdate
+    uris: "{{ community_prefix }}/category/update"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/category/update"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentUpdate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: communityCategoryRead
+    uris: "{{ community_prefix }}/category/read"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/category/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: deleteCommunityCategory
+    uris: "{{ community_prefix }}/category/delete"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/category/delete"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentUpdate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+        
+  - name: communityCategoryList
+    uris: "{{ community_prefix }}/category/list"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/category/list"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: workflowTransitionV2
+    uris: "{{ workflow_handler_service_prefix }}/v2/transition"
+    upstream_url: "{{ workflow_handler_service_url }}/v2/workflow/transition"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'dataCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ small_request_size_limit }}"
+
   - name: listCourseEnrollmentsV4
     uris: "{{ course_service_prefix }}/v4/user/enrollment/list"
     upstream_url: "{{ lms_service_url }}/v1/user/enrol/courses/list"
@@ -19109,3 +19217,22 @@ kong_apis:
         config.limit_by: credential
       - name: request-size-limiting
         config.allowed_payload_size: "{{ small_request_size_limit }}"
+
+  - name: communityCategorySearch
+    uris: "{{ community_prefix }}/subcategory/list"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/subcategory/list"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+        
