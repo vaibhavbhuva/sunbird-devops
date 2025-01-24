@@ -18876,7 +18876,7 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"        
 
-  - name: discussionUpdate
+  - name: createAnswerPost
     uris: "{{ discussionfeed_prefix }}/answerPosts"
     upstream_url: "{{ cb_discussion_service_url }}/discussion/answerPosts"
     strip_uri: true
