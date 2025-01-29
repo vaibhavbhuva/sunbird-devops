@@ -25,9 +25,9 @@ spec:
       - name: {{ .Values.imagepullsecrets }}
 {{- end }}
       volumes:
-        - name: gcpgeminicredentialsjson
+        - name: courrecocourrecogcpgeminicredentialsjson
           configMap:
-            name: gcpgeminicredentialsjson
+            name: courrecogcpgeminicredentialsjson
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.dockerhub }}/{{ .Values.repository }}:{{ .Values.image_tag }}"
@@ -41,7 +41,7 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
-        - name: gcpgeminicredentialsjson
+        - name: courrecogcpgeminicredentialsjson
           mountPath: /app/gcp_gemini_credentials.json
           subPath: gcp_gemini_credentials.json
         ports:

@@ -27,8 +27,8 @@ strategy:
   maxunavailable: {{ course_recommendation_maxunavailable|default('25%') }}
 
 
-gcpgeminicredentialsjson: |-
- {{gcp_gemini_upload_service_account}}
+courrecogcpgeminicredentialsjson: |-
+ {{course_recommendation_gcp_gemini_upload_service_account}}
 
 
 serviceMonitor:
