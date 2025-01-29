@@ -1,0 +1,31 @@
+---
+# vars file for deploy-vega-service
+# For script
+release_name: "{{ network_alias_course_recommendation_service }}"
+user_friendly_name: course_recommendation service
+#template_compose_file_name: ui-spv-igot.j2
+template_env_file_name: "course_recommendation.j2"
+compose_file_name: "{{ service_course_recommendation_service }}.yml"
+env_file_name: "{{ service_course_recommendation_service }}.env"
+helm_env_file_location: "../helm_charts/igot-deploy/templates/"
+helm_env_file_name: "{{ helm_env_file_location }}/{{ service_course_recommendation_service }}.env"
+
+
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+
+# For service
+application_port: "{{ service_course_recommendation_port }}"
+image_name: "{{ image_course_recommendation_service }}"
+tag: "{{ tags_course_recommendation_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_course_recommendation_service }}"
+reserved_memory: "{{ service_mem_reserved_course_recommendation_service }}"
+limited_memory: "{{ service_mem_limit_course_recommendation_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/healthcheck
+network_alias_name: "{{ network_alias_course_recommendation_service }}"
+docker_service_stack_name: ui
+docker_service_name: "{{ service_course_recommendation_service }}"
+force_reload: "{{ force_reload_course_recommendation_service }}"
+
