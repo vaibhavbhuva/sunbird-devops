@@ -25,7 +25,7 @@ spec:
       - name: {{ .Values.imagepullsecrets }}
 {{- end }}
       volumes:
-        - name: courrecocourrecogcpgeminicredentialsjson
+        - name: courrecogcpgeminicredentialsjson
           configMap:
             name: courrecogcpgeminicredentialsjson
       containers:
