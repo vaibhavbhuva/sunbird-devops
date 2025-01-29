@@ -1,18 +1,18 @@
 # Logger
-LOG_LEVEL="INFO"
+LOG_LEVEL=INFO
 
 # Qdrant 
 QDRANT_URL={{ qdrant_url }}
-QDRANT_DEPARTMENT_COLLECTION_NAME="departments"
-QDRANT_COMPETENCY_COLLECTION_NAME="competencies"
-QDRANT_ACRONYM_COLLECTION_NAME="abbreviations"
-QDRANT_ROLE_COLLECTION_NAME="role_designations"
-QDRANT_RELEVANT_COLLECTION_NAME="relevant_course"
-QDRANT_DESIGNATION_COLLECTION_NAME="designation_course"
-QDRANT_GROUP_COLLECTION_NAME="designation_group"
-QDRANT_DOMAIN_COLLECTION_NAME="domain_courses"
-QDRANT_SECTOR_COLLECTION_NAME="sector_course"
-QDRANT_RETRIEVAL_MODE="DENSE"
+QDRANT_DEPARTMENT_COLLECTION_NAME=departments
+QDRANT_COMPETENCY_COLLECTION_NAME=competencies
+QDRANT_ACRONYM_COLLECTION_NAME=abbreviations
+QDRANT_ROLE_COLLECTION_NAME=role_designations
+QDRANT_RELEVANT_COLLECTION_NAME=relevant_course
+QDRANT_DESIGNATION_COLLECTION_NAME=designation_course
+QDRANT_GROUP_COLLECTION_NAME=designation_group
+QDRANT_DOMAIN_COLLECTION_NAME=domain_courses
+QDRANT_SECTOR_COLLECTION_NAME=sector_course
+QDRANT_RETRIEVAL_MODE=DENSE
 QDRANT_DENSE_MODEL={{ qdrant_dense_model }}
 QDRANT_SPARSE_MODEL={{ qdrant_sparse_model }}
 
@@ -24,7 +24,7 @@ KB_COOKIES={{ kb_cookies }}
 GEMINI_MODEL={{ course_recommendation_gemini_model }}
 MODEL_TEMPERATURE=0
 GOOGLE_PROJECT_ID={{ course_recommendation_google_project_id }}
-GOOGLE_LOCATION="us-central1"
+GOOGLE_LOCATION=us-central1
 GOOGLE_APPLICATION_CREDENTIALS="gcp_gemini_credentials.json"
 
 # OpenAI
@@ -41,7 +41,7 @@ REDIS_TTL=43200
 POSTGRES_DATABASE_USERNAME={{ course_recommendation_psql_username }}
 POSTGRES_DATABASE_PASSWORD={{ course_recommendation_psql_password }}
 POSTGRES_DATABASE_HOST={{ postgresql_host }}
-POSTGRES_DATABASE_NAME="course_recommendation"
+POSTGRES_DATABASE_NAME=course_recommendation
 POSTGRES_DATABASE_PORT={{ postgresql_port }}
 
 ##
