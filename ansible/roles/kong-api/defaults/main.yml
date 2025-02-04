@@ -19295,7 +19295,7 @@ kong_apis:
 
   - name: courseRecommendationCreate
     uris: "{{ course_recommendation_prefix }}/create"
-    upstream_url: "{{ course_recommendation_service_url }}/api/recommendation"
+    upstream_url: "{{ course_recommendation_service_url }}/api/recommendation/create"
     strip_uri: true
     plugins:
       - name: jwt
@@ -19401,7 +19401,7 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
-  - name: chatBotmessageContentFeedback
+  - name: chatBotMessageContentFeedback
     uris: "{{ chatbot_prefix }}/message/content/feedback"
     upstream_url: "{{ course_recommendation_service_url }}/api/chat/message/content/feedback"
     strip_uri: true
