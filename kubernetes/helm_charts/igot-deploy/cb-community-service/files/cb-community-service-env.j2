@@ -52,3 +52,19 @@ rest.client.connection.request.timeout=45000
 rest.client.max.connections=2000
 rest.client.max.connections.per.route=500
 
+#kafka Server
+spring.kafka.bootstrap.servers={{ kafka_servers_list }}
+#kafka properties
+kakfa.offset.reset.value=latest
+kafka.max.poll.interval.ms=15000
+kafka.max.poll.records=100
+kafka.auto.commit.interval.ms=10000
+#kafka topics and group
+kafka.topic.community.group=community.request.group
+kafka.topic.community.user.count={{env}}.joined.user
+
+kafka.topic.community.user.count.group={{env}}.community.user.count.group
+kafka.topic.community.user.count={{env}}.community.joined.user.count
+kafka.topic.community.discusion.post.count.group={{env}}.community.discusion.post.count.group
+kafka.topic.community.discusion.post.count={{env}}.community.discusion.post.count
+
