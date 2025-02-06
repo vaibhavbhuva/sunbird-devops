@@ -145,6 +145,8 @@ blended_program_prefix: /bp
 discussionfeed_prefix: /feedDiscussion
 community_prefix: /community/v1
 super_user_service_prefix: /super/user
+course_recommendation_prefix: /courseRecommendation
+chatbot_prefix: /chatbot
 
 
 # Service URLs
@@ -194,6 +196,7 @@ cb_comment_service_url: "http://cb-comment-service:8099"
 public_assessment_service_url : "http://public-assessment-service:8090"
 cb_discussion_service_url : "http://cb-discussion-service:7001"
 cb_community_service_url : "http://cb-community-service:7001"
+course_recommendation_service_url : "http://course-recommendation-service:8000"
 
 premium_consumer_rate_limits:
   - api: createContent
@@ -19288,4 +19291,166 @@ kong_apis:
         config.hour: "{{ medium_rate_limit_per_hour }}"
         config.limit_by: credential
       - name: request-size-limiting
-        config.allowed_payload_size: "{{ medium_request_size_limit }}"        
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: courseRecommendationCreate
+    uris: "{{ course_recommendation_prefix }}/create"
+    upstream_url: "{{ course_recommendation_service_url }}/api/recommendation/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: courseRecommendationRead
+    uris: "{{ course_recommendation_prefix }}/read"
+    upstream_url: "{{ course_recommendation_service_url }}/api/recommendation/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: courseRecommendationFeedback
+    uris: "{{ course_recommendation_prefix }}/feedback"
+    upstream_url: "{{ course_recommendation_service_url }}/api/recommendation/feedback"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: chatBotSessionStart
+    uris: "{{ chatbot_prefix }}/session/start"
+    upstream_url: "{{ course_recommendation_service_url }}/api/chat/session/start"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: chatBotSessionRead
+    uris: "{{ chatbot_prefix }}/session"
+    upstream_url: "{{ course_recommendation_service_url }}/api/chat/session"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: chatBotMessageFeedback
+    uris: "{{ chatbot_prefix }}/message/feedback"
+    upstream_url: "{{ course_recommendation_service_url }}/api/chat/message/feedback"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: chatBotMessageContentFeedback
+    uris: "{{ chatbot_prefix }}/message/content/feedback"
+    upstream_url: "{{ course_recommendation_service_url }}/api/chat/message/content/feedback"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: bookMarkPosts
+    uris: "{{ discussionfeed_prefix }}/bookmark"
+    upstream_url: "{{ cb_discussion_service_url }}/discussion/bookmark"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: unBookMarkPosts
+    uris: "{{ discussionfeed_prefix }}/unbookmark"
+    upstream_url: "{{ cb_discussion_service_url }}/discussion/unBookmark"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
