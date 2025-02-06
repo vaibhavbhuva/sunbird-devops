@@ -19454,3 +19454,423 @@ kong_apis:
         config.limit_by: credential
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportData
+    uris: "{{ mentoring_prefix }}/v1/reports/reportData"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/reportData"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportCreate
+    uris: "{{ mentoring_prefix }}/v1/reports/create"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+ - name: mentoringReportRead
+    uris: "{{ mentoring_prefix }}/v1/reports/read"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+- name: mentoringReportUpdate
+    uris: "{{ mentoring_prefix }}/v1/reports/update"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/update"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+        
+  - name: mentoringReportDelete
+    uris: "{{ mentoring_prefix }}/v1/reports/delete"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/delete"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportTypeCreate
+    uris: "{{ mentoring_prefix }}/v1/report-type/create"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-type/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportTypeRead
+    uris: "{{ mentoring_prefix }}/v1/report-type/read"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-type/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportTypeUpdate
+    uris: "{{ mentoring_prefix }}/v1/report-type/update"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-type/update"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportTypeDelete
+    uris: "{{ mentoring_prefix }}/v1/report-type/delete"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-type/delete"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportMappingCreate
+    uris: "{{ mentoring_prefix }}/v1/report-mapping/create"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-mapping/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportMappingRead
+    uris: "{{ mentoring_prefix }}/v1/report-mapping/read"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-mapping/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+
+  - name: mentoringReportMappingUpdate
+    uris: "{{ mentoring_prefix }}/v1/report-mapping/update"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-mapping/update"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportMappingDelete
+    uris: "{{ mentoring_prefix }}/v1/report-mapping/delete"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-mapping/delete"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportQueriesCreate
+    uris: "{{ mentoring_prefix }}/v1/report-queries/create"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-queries/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportQueriesRead
+    uris: "{{ mentoring_prefix }}/v1/report-queries/read"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-queries/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportQueriesUpdate
+    uris: "{{ mentoring_prefix }}/v1/report-queries/update"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-queries/update"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportQueriesDelete
+    uris: "{{ mentoring_prefix }}/v1/report-queries/delete"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/report-queries/delete"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringRoleExtCreate
+    uris: "{{ mentoring_prefix }}/v1/role-extension/create"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/role-extension/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringRoleExtRead
+    uris: "{{ mentoring_prefix }}/v1/role-extension/read"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/role-extension/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringRoleExtUpdate
+    uris: "{{ mentoring_prefix }}/v1/role-extension/update"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/role-extension/update"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringRoleExtDelete
+    uris: "{{ mentoring_prefix }}/v1/role-extension/delete"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/role-extension/delete"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: mentoringReportFilter
+    uris: "{{ mentoring_prefix }}/v1/reports/filterList"
+    upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/filterList"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'mentorServiceMentee'
+          - 'mentorServiceMentor'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+  
