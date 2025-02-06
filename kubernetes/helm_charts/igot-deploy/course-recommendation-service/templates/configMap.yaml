@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: courrecogcpgeminicredentialsjson
+  namespace: {{ .Values.namespace }}
+data:
+  gcp_gemini_credentials.json: |
+{{ .Values.courrecogcpgeminicredentialsjson | indent 4 }}
+
+---

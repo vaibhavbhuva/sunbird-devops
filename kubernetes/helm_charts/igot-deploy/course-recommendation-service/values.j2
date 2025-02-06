@@ -1,0 +1,46 @@
+### Default variable file for course_recommendation-service ###
+
+namespace: {{ namespace }}
+imagepullsecrets: {{ imagepullsecrets }}
+dockerhub: {{ docker_hub_url }}
+
+
+env:
+  javaoptions: {{course_recommendation_java_mem_limit|default('-Xmx600m')}}
+
+replicaCount: {{course_recommendation_replicacount|default(1)}}
+repository: {{ image_course_recommendation_service }}
+image_tag: {{ image_tag }}
+resources:
+  requests:
+    cpu: {{course_recommendation_cpu_req|default('200m')}}
+    memory: {{course_recommendation_mem_req|default('200Mi')}}
+  limits:
+    cpu: {{course_recommendation_cpu_limit|default('500m')}}
+    memory: {{course_recommendation_mem_limit|default('800Mi')}}
+network:
+  port: {{ service_course_recommendation_port }}
+  targetport: {{ service_course_recommendation_port }}
+strategy:
+  type: RollingUpdate
+  maxsurge: {{ course_recommendation_maxsurge|default('25%') }}
+  maxunavailable: {{ course_recommendation_maxunavailable|default('25%') }}
+
+
+courrecogcpgeminicredentialsjson: |-
+ {{course_recommendation_gcp_gemini_upload_service_account}}
+
+
+serviceMonitor:
+  enabled: true
+  labels: # labels with which the prometheus choose the serviceMonitor
+    app: prometheus-operator
+    release: prometheus-operator
+
+autoscaling:
+  enabled: {{ course_recommendation_autoscaling_enabled | default('false') }}
+  minReplicas: {{ course_recommendation_autoscaling_minReplicas|default(1) }}
+  maxReplicas: {{ course_recommendation_autoscaling_maxReplicas|default(2) }}
+  targetCPUUtilizationPercentage: {{ course_recommendation_autoscaling_targetCPUUtilizationPercentage|default(60) }}
+  targetMemoryUtilizationPercentage: {{ course_recommendation_autoscaling_targetMemoryUtilizationPercentage|default('') }}
+
