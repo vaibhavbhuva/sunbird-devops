@@ -19493,7 +19493,7 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
- - name: mentoringReportRead
+  - name: mentoringReportRead
     uris: "{{ mentoring_prefix }}/v1/reports/read"
     upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/read"
     strip_uri: true
@@ -19512,7 +19512,7 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
-- name: mentoringReportUpdate
+  - name: mentoringReportUpdate
     uris: "{{ mentoring_prefix }}/v1/reports/update"
     upstream_url: "{{ mentoring_interface_service_url }}/mentoring/v1/reports/update"
     strip_uri: true
