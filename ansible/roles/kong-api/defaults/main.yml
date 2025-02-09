@@ -19874,7 +19874,7 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
-    - name: getBookMarkedPosts
+  - name: getBookMarkedPosts
     uris: "{{ discussionfeed_prefix }}/bookmarkedDiscussions"
     upstream_url: "{{ cb_discussion_service_url }}/discussion/bookmarkedDiscussions"
     strip_uri: true
