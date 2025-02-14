@@ -19948,7 +19948,7 @@ kong_apis:
 
   - name: courseRecommendationNonRelevantCourseUpdate
     uris: "{{ course_recommendation_prefix }}/v1/update"
-    upstream_url: "{{ sb_cb_ext_service_url }}/v1/update"
+    upstream_url: "{{ sb_cb_ext_service_url }}/courseRecommendation/v1/update"
     strip_uri: true
     plugins:
       - name: jwt
@@ -19966,7 +19966,7 @@ kong_apis:
 
   - name: courseRecommendationNonRelevantCourseRead
     uris: "{{ course_recommendation_prefix }}/v1/read"
-    upstream_url: "{{ sb_cb_ext_service_url }}/v1/read"
+    upstream_url: "{{ sb_cb_ext_service_url }}/courseRecommendation/v1/read"
     strip_uri: true
     plugins:
       - name: jwt
