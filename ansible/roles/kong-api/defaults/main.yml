@@ -19984,7 +19984,7 @@ kong_apis:
 
 
   - name: eventUserBulkOnboardV2
-    uris: "{{ user_service_prefix }}/v1/event/bulkonboard"
+    uris: "{{ user_service_prefix }}/v2/event/bulkonboard"
     upstream_url: "{{ sb_cb_ext_service_url }}/v2/user/event/bulkOnboard"
     strip_uri: true
     plugins:
