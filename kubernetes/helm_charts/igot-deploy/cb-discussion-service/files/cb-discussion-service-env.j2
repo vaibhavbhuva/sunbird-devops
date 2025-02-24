@@ -62,5 +62,8 @@ discussion.container.name={{sb_cb_ext_container}}
 
 kafka.topic.community.discusion.post.count.group={{env}}.community.discusion.post.count.group
 kafka.topic.community.discusion.post.count={{env}}.community.discusion.post.count
-report.post.user.limit=10
+report.post.user.limit={{discusion_report_post_user_limit|default(5)}}
+
+discussion.es.defaultPageSize=10
+discussion.feed.redis.ttl=3600
 
