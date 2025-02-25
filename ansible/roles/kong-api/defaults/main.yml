@@ -20056,7 +20056,7 @@ kong_apis:
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
   - name: ParichayUserCreate
-    uris: "{{ user_service_prefix }}/parichay/create"
+    uris: "{{ user_service_prefix }}/v5/parichay/create"
     upstream_url: "{{ learning_service_url }}/v5/cb/user/parichay/create"
     strip_uri: true
     plugins:
@@ -20074,7 +20074,7 @@ kong_apis:
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
   - name: createCbUser
-    uris: "{{ user_service_prefix }}/cb/v5/create"
+    uris: "{{ user_service_prefix }}/v5/create"
     upstream_url: "{{ learning_service_url }}/v5/cb/user/create"
     strip_uri: true
     plugins:
@@ -20092,7 +20092,7 @@ kong_apis:
         config.allowed_payload_size: "{{ small_request_size_limit }}"
 
   - name: CbUserSelfRegister
-    uris: "{{ user_service_prefix }}/cb/self/register"
+    uris: "{{ user_service_prefix }}/v5/self/register"
     upstream_url: "{{ learning_service_url }}/v5/cb/user/self/register"
     strip_uri: true
     plugins:
@@ -20110,7 +20110,7 @@ kong_apis:
         config.allowed_payload_size: "{{ small_request_size_limit }}"
 
   - name: CbUserCustomRegister
-    uris: "{{ user_service_prefix }}/cb/custom/register"
+    uris: "{{ user_service_prefix }}/v5/custom/register"
     upstream_url: "{{ learning_service_url }}/v5/cb/user/custom/register"
     strip_uri: true
     plugins:
