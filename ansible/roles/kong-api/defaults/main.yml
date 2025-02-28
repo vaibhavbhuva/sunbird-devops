@@ -3823,7 +3823,7 @@ kong_apis:
 
   - name: updateForm
     uris: "{{ data_service_prefix }}/v1/form/update"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/update"
+    upstream_url: "{{ player_service_url }}/v1/form/update"
     strip_uri: true
     plugins:
     - name: jwt
@@ -4197,7 +4197,7 @@ kong_apis:
 
   - name: updateForm
     uris: "{{ data_service_prefix }}/v1/form/update"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/update"
+    upstream_url: "{{ player_service_url }}/v1/form/update"
     strip_uri: true
     plugins:
     - name: jwt
@@ -5373,7 +5373,7 @@ kong_apis:
 
   - name: listForm
     uris: "{{ data_service_prefix }}/v1/form/list"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/list"
+    upstream_url: "{{ player_service_url }}/v1/form/list"
     strip_uri: true
     plugins:
     - name: jwt
