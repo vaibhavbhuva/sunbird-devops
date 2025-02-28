@@ -35,7 +35,6 @@ elasticsearch.host={{ elasticsearch_host }}
 elasticsearch.port={{ elasticsearch_http_port }}
 elasticsearch.username={{ elasticsearch_username }}
 elasticsearch.password={{ elasticsearch_password }}
-elastic.required.field.discussion.json.path=/EsFieldsmapping/discussionEsMapping.json
  
 #kafka Server
 spring.kafka.bootstrap.servers={{ kafka_servers_list }}
@@ -67,4 +66,10 @@ report.post.user.limit={{discusion_report_post_user_limit|default(5)}}
 discussion.es.defaultPageSize=10
 discussion.feed.redis.ttl=3600
 discussion.report.hide.post=true
+
+discussionValidation=/payloadValidation/discussionValidation.json
+discussionUpdateValidation=/payloadValidation/discussionUpdateValidation.json
+discussionAnswerPostValidation=/payloadValidation/discussionAnswerPostValidation.json
+answerPostUpdateValidation=/payloadValidation/answerPostUpdateValidation.json
+elastic.required.field.discussion.json.path=/EsFieldsmapping/discussionEsMapping.json
 

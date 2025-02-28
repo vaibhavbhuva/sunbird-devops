@@ -747,6 +747,7 @@ service_thumbnail_generation_service: thumbnail-generation-service
 service_cb_discussion_service: cb-discussion-service
 service_cb_community_service: cb-community-service
 service_course_recommendation_service: course-recommendation-service
+service_discussion_metaupdate_service: discussion-metaupdate-service
 
 # Ports
 service_bulk_upload_port: 3009
@@ -827,6 +828,7 @@ service_thumbnail_generation_port: 8000
 service_cb_discussion_port: 7001
 service_cb_community_port: 7001
 service_course_recommendation_port: 8000
+service_discussion_metaupdate_service_port: 7002
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -890,6 +892,7 @@ network_alias_thumbnail_generation_service: thumbnail-generation-service
 network_alias_cb_discussion_service: cb-discussion-service
 network_alias_cb_community_service: cb-community-service
 network_alias_course_recommendation_service: course-recommendation-service
+network_alias_discussion_metaupdate_service: discussion-metaupdate-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -950,5 +953,6 @@ image_thumbnail_generation_service: thumbnail-generation-service
 image_cb_discussion_service: cb-discussion-service
 image_cb_community_service: cb-community-service
 image_course_recommendation_service: course-recommendation-service
+image_discussion_metaupdate_service: discussion-metaupdate-service
 #####################bulk-upload-spv#########
 host_bulk_upload: /mydata/bulk_upload
