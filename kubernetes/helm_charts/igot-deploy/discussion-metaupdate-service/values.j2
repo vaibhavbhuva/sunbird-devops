@@ -1,4 +1,4 @@
-### Default variable file for discussion_metaupdate_service_service ###
+### Default variable file for discussion_metaupdate_service ###
 
 namespace: {{ namespace }}
 imagepullsecrets: {{ imagepullsecrets }}
@@ -9,7 +9,7 @@ env:
   javaoptions: {{discussion_metaupdate_service_java_mem_limit|default('-Xmx600m')}}
 
 replicaCount: {{discussion_metaupdate_service_replicacount|default(1)}}
-repository: {{ image_discussion_metaupdate_service_service }}
+repository: {{ image_discussion_metaupdate_service }}
 image_tag: {{image_tag}}
 resources:
   requests:
@@ -36,9 +36,9 @@ serviceMonitor:
     release: prometheus-operator
 
 autoscaling:
-  enabled: {{ discussion_metaupdate_service_service_autoscaling_enabled | default('false') }}
-  minReplicas: {{ discussion_metaupdate_service_service_autoscaling_minReplicas|default(1) }}
-  maxReplicas: {{ discussion_metaupdate_service_service_autoscaling_maxReplicas|default(2) }}
-  targetCPUUtilizationPercentage: {{ discussion_metaupdate_service_service_autoscaling_targetCPUUtilizationPercentage|default(60) }}
-  targetMemoryUtilizationPercentage: {{ discussion_metaupdate_service_service_autoscaling_targetMemoryUtilizationPercentage|default('') }}
+  enabled: {{ discussion_metaupdate_service_autoscaling_enabled | default('false') }}
+  minReplicas: {{ discussion_metaupdate_service_autoscaling_minReplicas|default(1) }}
+  maxReplicas: {{ discussion_metaupdate_service_autoscaling_maxReplicas|default(2) }}
+  targetCPUUtilizationPercentage: {{ discussion_metaupdate_service_autoscaling_targetCPUUtilizationPercentage|default(60) }}
+  targetMemoryUtilizationPercentage: {{ discussion_metaupdate_service_autoscaling_targetMemoryUtilizationPercentage|default('') }}
 
