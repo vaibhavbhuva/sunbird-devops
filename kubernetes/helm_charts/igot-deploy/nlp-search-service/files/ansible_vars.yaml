@@ -4,7 +4,7 @@
 release_name: "{{ network_alias_nlp_search_service }}"
 user_friendly_name: nlp_search service
 #template_compose_file_name: ui-spv-igot.j2
-template_env_file_name: "nlp_search.j2"
+template_env_file_name: "nlp_search-env.j2"
 compose_file_name: "{{ service_nlp_search_service }}.yml"
 env_file_name: "{{ service_nlp_search_service }}.env"
 helm_env_file_location: "../helm_charts/igot-deploy/templates/"
