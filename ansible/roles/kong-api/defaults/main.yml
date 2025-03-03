@@ -147,6 +147,7 @@ community_prefix: /community/v1
 super_user_service_prefix: /super/user
 course_recommendation_prefix: /courseRecommendation
 chatbot_prefix: /chatbot
+nlp_prefix: /nlp
 
 
 # Service URLs
@@ -197,6 +198,7 @@ public_assessment_service_url : "http://public-assessment-service:8090"
 cb_discussion_service_url : "http://cb-discussion-service:7001"
 cb_community_service_url : "http://cb-community-service:7001"
 course_recommendation_service_url : "http://course-recommendation-service:8000"
+nlp_search_service_url : "http://nlp-search-service:8000"
 
 premium_consumer_rate_limits:
   - api: createContent
@@ -20068,4 +20070,22 @@ kong_apis:
         config.hour: "{{ medium_rate_limit_per_hour }}"
         config.limit_by: credential
       - name: request-size-limiting
-        config.allowed_payload_size: "{{ medium_request_size_limit }}"                
+        config.allowed_payload_size: "{{ medium_request_size_limit }}" 
+
+  - name: nlpSearch
+    uris: "{{ nlp_prefix }}/search"
+    upstream_url: "{{ nlp_search_service_url }}/nlp/search"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAdmin'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
