@@ -20072,6 +20072,78 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}" 
 
+  - name: ParichayUserCreate
+    uris: "{{ user_service_prefix }}/v5/parichay/create"
+    upstream_url: "{{ learning_service_url }}/v5/cb/user/parichay/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'anonymousUserCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: createCbUser
+    uris: "{{ user_service_prefix }}/v5/create"
+    upstream_url: "{{ learning_service_url }}/v5/cb/user/create"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'userCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ small_request_size_limit }}"
+
+  - name: CbUserSelfRegister
+    uris: "{{ user_service_prefix }}/v5/self/register"
+    upstream_url: "{{ learning_service_url }}/v5/cb/user/self/register"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'userCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ small_request_size_limit }}"
+
+  - name: CbUserCustomRegister
+    uris: "{{ user_service_prefix }}/v5/custom/register"
+    upstream_url: "{{ learning_service_url }}/v5/cb/user/custom/register"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'userCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ small_request_size_limit }}"
+
   - name: nlpSearch
     uris: "{{ nlp_prefix }}/search"
     upstream_url: "{{ nlp_search_service_url }}/nlp/search"
