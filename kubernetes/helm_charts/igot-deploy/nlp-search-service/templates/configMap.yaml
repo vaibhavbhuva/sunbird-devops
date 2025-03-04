@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gcpnlpsearchcredentialsjson
+  namespace: {{ .Values.namespace }}
+data:
+  gcp_nlp_search_credentials.json: |
+{{ .Values.gcpnlpsearchcredentialsjson | indent 4 }}
+
+---

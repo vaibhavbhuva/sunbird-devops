@@ -147,6 +147,7 @@ community_prefix: /community/v1
 super_user_service_prefix: /super/user
 course_recommendation_prefix: /courseRecommendation
 chatbot_prefix: /chatbot
+nlp_prefix: /nlp
 
 
 # Service URLs
@@ -154,7 +155,7 @@ knowledge_mw_service_url: "http://knowledge-mw-service:5000"
 learning_service_url: "http://learner-service:9000"
 vm_learning_service_url: "http://{{learningservice_ip}}:8080/learning-service"
 telemetry_service_url: "http://telemetry-service:9001"
-player_service_url: "http://player:3000"
+player_service_url: "http://ui-proxies:3003"
 echo_service_url: "http://echo:9595"
 am_util_url: "http://adminutil:4000"
 config_service_url: "http://config-service:8080"
@@ -197,6 +198,7 @@ public_assessment_service_url : "http://public-assessment-service:8090"
 cb_discussion_service_url : "http://cb-discussion-service:7001"
 cb_community_service_url : "http://cb-community-service:7001"
 course_recommendation_service_url : "http://course-recommendation-service:8000"
+nlp_search_service_url : "http://nlp-search-service:8000"
 
 premium_consumer_rate_limits:
   - api: createContent
@@ -2775,7 +2777,7 @@ kong_apis:
 
   - name: readForm
     uris: "{{ data_service_prefix }}/v1/form/read"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/read"
+    upstream_url: "{{ player_service_url }}/v1/form/read"
     strip_uri: true
     plugins:
     - name: cors
@@ -3069,7 +3071,7 @@ kong_apis:
 
   - name: readForm
     uris: "{{ data_service_prefix }}/v1/form/read"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/read"
+    upstream_url: "{{ player_service_url }}/v1/form/read"
     strip_uri: true
     plugins:
     - name: cors
@@ -3823,7 +3825,7 @@ kong_apis:
 
   - name: updateForm
     uris: "{{ data_service_prefix }}/v1/form/update"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/update"
+    upstream_url: "{{ player_service_url }}/v1/form/update"
     strip_uri: true
     plugins:
     - name: jwt
@@ -3831,7 +3833,7 @@ kong_apis:
     - "{{ statsd_pulgin }}"
     - name: acl
       config.whitelist:
-        - 'formUpdate'
+        - 'contentUpdate'
     - name: rate-limiting
       config.policy: local
       config.hour: "{{ medium_rate_limit_per_hour }}"
@@ -4197,7 +4199,7 @@ kong_apis:
 
   - name: updateForm
     uris: "{{ data_service_prefix }}/v1/form/update"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/update"
+    upstream_url: "{{ player_service_url }}/v1/form/update"
     strip_uri: true
     plugins:
     - name: jwt
@@ -4205,7 +4207,22 @@ kong_apis:
     - "{{ statsd_pulgin }}"
     - name: acl
       config.whitelist:
-        - 'formUpdate'
+        - 'contentUpdate'
+    - name: rate-limiting
+      config.policy: local
+      config.hour: "{{ medium_rate_limit_per_hour }}"
+      config.limit_by: credential
+    - name: request-size-limiting
+      config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: createFormui
+    uris: "{{ data_service_prefix }}/v1/form/create"
+    upstream_url: "{{ player_service_url }}/v1/form/create"
+    strip_uri: true
+    plugins:
+    - name: jwt
+    - name: cors
+    - "{{ statsd_pulgin }}"
     - name: rate-limiting
       config.policy: local
       config.hour: "{{ medium_rate_limit_per_hour }}"
@@ -5373,7 +5390,7 @@ kong_apis:
 
   - name: listForm
     uris: "{{ data_service_prefix }}/v1/form/list"
-    upstream_url: "{{ player_service_url }}/plugin/v1/form/list"
+    upstream_url: "{{ player_service_url }}/v1/form/list"
     strip_uri: true
     plugins:
     - name: jwt

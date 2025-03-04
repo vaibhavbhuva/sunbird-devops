@@ -1,0 +1,48 @@
+### Default variable file for nlp_search-service ###
+
+namespace: {{ namespace }}
+imagepullsecrets: {{ imagepullsecrets }}
+dockerhub: {{ docker_hub_url }}
+
+
+env:
+  javaoptions: {{nlp_search_java_mem_limit|default('-Xmx600m')}}
+
+replicaCount: {{nlp_search_replicacount|default(1)}}
+repository: {{ image_nlp_search_service }}
+image_tag: {{ image_tag }}
+resources:
+  requests:
+    cpu: {{nlp_search_cpu_req|default('200m')}}
+    memory: {{nlp_search_mem_req|default('200Mi')}}
+  limits:
+    cpu: {{nlp_search_cpu_limit|default('500m')}}
+    memory: {{nlp_search_mem_limit|default('800Mi')}}
+network:
+  port: {{ service_nlp_search_port }}
+  targetport: {{ service_nlp_search_port }}
+strategy:
+  type: RollingUpdate
+  maxsurge: {{ nlp_search_maxsurge|default('25%') }}
+  maxunavailable: {{ nlp_search_maxunavailable|default('25%') }}
+
+gcpstoragecredentialsjson: |-
+ {{gcp_artifcats_upload_service_account}}
+
+gcpnlpsearchcredentialsjson: |-
+ {{gcp_gemini_upload_service_account}}
+
+
+serviceMonitor:
+  enabled: true
+  labels: # labels with which the prometheus choose the serviceMonitor
+    app: prometheus-operator
+    release: prometheus-operator
+
+autoscaling:
+  enabled: {{ nlp_search_autoscaling_enabled | default('false') }}
+  minReplicas: {{ nlp_search_autoscaling_minReplicas|default(1) }}
+  maxReplicas: {{ nlp_search_autoscaling_maxReplicas|default(2) }}
+  targetCPUUtilizationPercentage: {{ nlp_search_autoscaling_targetCPUUtilizationPercentage|default(60) }}
+  targetMemoryUtilizationPercentage: {{ nlp_search_autoscaling_targetMemoryUtilizationPercentage|default('') }}
+
