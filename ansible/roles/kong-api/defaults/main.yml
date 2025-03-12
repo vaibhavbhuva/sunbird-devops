@@ -148,6 +148,7 @@ super_user_service_prefix: /super/user
 course_recommendation_prefix: /courseRecommendation
 chatbot_prefix: /chatbot
 nlp_prefix: /nlp
+thumbnail_service_prefix: /thumbnail
 
 
 # Service URLs
@@ -199,6 +200,7 @@ cb_discussion_service_url : "http://cb-discussion-service:7001"
 cb_community_service_url : "http://cb-community-service:7001"
 course_recommendation_service_url : "http://course-recommendation-service:8000"
 nlp_search_service_url : "http://nlp-search-service:8000"
+thumbnail_service_url : "http://thumbnail-generation-service:8000"
 
 premium_consumer_rate_limits:
   - api: createContent
@@ -20335,6 +20337,24 @@ kong_apis:
       - name: acl
         config.whitelist:
           - 'contentCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: thumbnailGeneration
+    uris: "{{ thumbnail_service_prefix }}/v1/image/variations/course"
+    upstream_url: "{{ thumbnail_service_url }}/v1/image/variations/course"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
       - name: rate-limiting
         config.policy: local
         config.hour: "{{ medium_rate_limit_per_hour }}"
