@@ -19076,7 +19076,7 @@ kong_apis:
         config.hour: "{{ medium_rate_limit_per_hour }}"
         config.limit_by: credential
       - name: request-size-limiting
-        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+        config.allowed_payload_size: "{{ large_request_size_limit }}"
 
   - name: communityCategoryCreate
     uris: "{{ community_prefix }}/category/create"
