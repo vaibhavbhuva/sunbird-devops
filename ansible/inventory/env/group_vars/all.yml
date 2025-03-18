@@ -832,7 +832,7 @@ service_cb_community_port: 7001
 service_course_recommendation_port: 8000
 service_discussion_metaupdate_service_port: 7002
 service_nlp_search_port: 8000
-service_cb_org_hierarchy_service_port: 8888
+service_cb_org_hierarchy_port: 8888
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
