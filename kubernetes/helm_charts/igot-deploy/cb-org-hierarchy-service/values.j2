@@ -6,21 +6,21 @@ dockerhub: {{ docker_hub_url }}
 
 
 env:
-  javaoptions: {{sb_cb_ext_java_mem_limit|default('-Xmx4096m')}}
+  javaoptions: {{cb_org_hierarchy_java_mem_limit|default('-Xmx4096m')}}
 
-replicaCount: {{sb_cb_ext_replicacount|default(1)}}
-repository: {{ image_sb_cb_ext_service }}
+replicaCount: {{cb_org_hierarchy_replicacount|default(1)}}
+repository: {{ image_cb_org_hierarchy_service }}
 image_tag: {{ image_tag }}
 resources:
   requests:
-    cpu: {{sb_cb_ext_cpu_req|default('100m')}}
-    memory: {{sb_cb_ext_mem_req|default('200Mi')}}
+    cpu: {{cb_org_hierarchy_cpu_req|default('100m')}}
+    memory: {{cb_org_hierarchy_mem_req|default('200Mi')}}
   limits:
-    cpu: {{ sb_cb_ext_cpu_limit|default('2')}}
-    memory: {{sb_cb_ext_mem_limit|default('6144Mi')}}
+    cpu: {{ cb_org_hierarchy_cpu_limit|default('2')}}
+    memory: {{cb_org_hierarchy_mem_limit|default('6144Mi')}}
 network:
-  port: {{ service_sb_cb_ext_port }}
-  targetport: {{ service_sb_cb_ext_port }}
+  port: {{ service_cb_org_hierarchy_port }}
+  targetport: {{ service_cb_org_hierarchy_port }}
 strategy:
   type: RollingUpdate
   maxsurge: {{ lms_maxsurge|default('25%') }}
@@ -35,9 +35,9 @@ serviceMonitor:
     release: prometheus-operator
 
 autoscaling:
-  enabled: {{ sb_cb_ext_service_autoscaling_enabled | default('false') }}
-  minReplicas: {{ sb_cb_ext_service_autoscaling_minReplicas|default(1) }}
-  maxReplicas: {{ sb_cb_ext_service_autoscaling_maxReplicas|default(2) }}
-  targetCPUUtilizationPercentage: {{ sb_cb_ext_service_autoscaling_targetCPUUtilizationPercentage|default(60) }}
-  targetMemoryUtilizationPercentage: {{ sb_cb_ext_service_autoscaling_targetMemoryUtilizationPercentage|default('') }}
+  enabled: {{ cb_org_hierarchy_service_autoscaling_enabled | default('false') }}
+  minReplicas: {{ cb_org_hierarchy_service_autoscaling_minReplicas|default(1) }}
+  maxReplicas: {{ cb_org_hierarchy_service_autoscaling_maxReplicas|default(2) }}
+  targetCPUUtilizationPercentage: {{ cb_org_hierarchy_service_autoscaling_targetCPUUtilizationPercentage|default(60) }}
+  targetMemoryUtilizationPercentage: {{ cb_org_hierarchy_service_autoscaling_targetMemoryUtilizationPercentage|default('') }}
 
