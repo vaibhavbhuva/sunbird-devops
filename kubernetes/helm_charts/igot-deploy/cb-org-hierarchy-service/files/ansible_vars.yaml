@@ -15,7 +15,7 @@ compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name 
 user_friendly_name: cb-org-hierarchy-service
 
 # For service
-application_port: "{{ service_sb_cb_ext_port }}"
+application_port: "{{ service_cb_org_hierarchy_service_port }}"
 image_name: "{{ image_cb_org_hierarchy_service }}"
 tag: "{{ tags_cb_org_hierarchy_service }}"
 host_port: "{{ application_port }}"
