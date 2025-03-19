@@ -37,17 +37,17 @@ cb_comment_liveness_readiness:
     httpGet:
       path: /liveness
       port: 8099
-    initialDelaySeconds: 15
-    periodSeconds: 15
-    timeoutSeconds: 5
+    initialDelaySeconds: 30
+    periodSeconds: 30
+    timeoutSeconds: 15
     failureThreshold: 2
   livenessProbe:
     httpGet:
       path: /liveness
       port: 8099
-    initialDelaySeconds: 15
-    periodSeconds: 15
-    timeoutSeconds: 5
+    initialDelaySeconds: 30
+    periodSeconds: 30
+    timeoutSeconds: 15
     failureThreshold: 2
 
 # For application
