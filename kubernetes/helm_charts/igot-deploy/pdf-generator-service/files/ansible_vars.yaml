@@ -36,17 +36,17 @@ pdf_generator_liveness_readiness:
     httpGet:
       path: /liveness
       port: 3000
-    initialDelaySeconds: 30
-    periodSeconds: 30
-    timeoutSeconds: 15
+    initialDelaySeconds: 15
+    periodSeconds: 15
+    timeoutSeconds: 5
     failureThreshold: 2
   livenessProbe:
     httpGet:
       path: /liveness
       port: 3000
-    initialDelaySeconds: 30
-    periodSeconds: 30
-    timeoutSeconds: 15
+    initialDelaySeconds: 15
+    periodSeconds: 15
+    timeoutSeconds: 5
     failureThreshold: 2
 
 # For application
