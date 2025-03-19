@@ -26,7 +26,7 @@ strategy:
   maxsurge: {{ ui_proxies_maxsurge|default('25%') }}
   maxunavailable: {{ ui_proxies_maxunavailable|default('25%') }}
 
-{{ ui_proxies_liveness_readiness | to_nice_yaml }}
+###{{ ui_proxies_liveness_readiness | to_nice_yaml }}
 
 ui_proxies_bulk_upload: {{ host_bulk_upload }}
 
