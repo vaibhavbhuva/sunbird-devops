@@ -26,7 +26,7 @@ strategy:
   maxsurge: {{ cb_comment_maxsurge|default('25%') }}
   maxunavailable: {{ cb_comment_maxunavailable|default('25%') }}
 
-{{ cb_comment_liveness_readiness | to_nice_yaml }}
+###{{ cb_comment_liveness_readiness | to_nice_yaml }}
 
 cb_comment_backend_basepath: {{ cb_comment_backend_basepath | default('/keys/') }}
 
