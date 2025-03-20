@@ -1,0 +1,44 @@
+### Default variable file for certificate_generator_service ###
+
+namespace: {{ namespace }}
+imagepullsecrets: {{ imagepullsecrets }}
+dockerhub: {{ docker_hub_url }}
+
+
+env:
+  javaoptions: {{certificate_generator_java_mem_limit|default('-Xmx600m')}}
+
+replicaCount: {{certificate_generator_replicacount|default(1)}}
+repository: {{ image_certificate_generator_service }}
+image_tag: {{image_tag}}
+resources:
+  requests:
+    cpu: {{certificate_generator_cpu_req|default('100m')}}
+    memory: {{certificate_generator_mem_req|default('100Mi')}}
+  limits:
+    cpu: {{certificate_generator_cpu_limit|default('1')}}
+    memory: {{certificate_generator_mem_limit|default('1024Mi')}}
+network:
+  port: {{ service_certificate_generator_port }}
+  targetport: {{ service_certificate_generator_port }}
+strategy:
+  type: RollingUpdate
+  maxsurge: {{ certificate_generator_maxsurge|default('25%') }}
+  maxunavailable: {{ certificate_generator_maxunavailable|default('25%') }}
+
+certificate_generator_backend_basepath: {{ certificate_generator_backend_basepath | default('/keys/') }}
+
+
+serviceMonitor:
+  enabled: true
+  labels: # labels with which the prometheus choose the serviceMonitor
+    app: prometheus-operator
+    release: prometheus-operator
+
+autoscaling:
+  enabled: {{ certificate_generator_service_autoscaling_enabled | default('false') }}
+  minReplicas: {{ certificate_generator_service_autoscaling_minReplicas|default(1) }}
+  maxReplicas: {{ certificate_generator_service_autoscaling_maxReplicas|default(2) }}
+  targetCPUUtilizationPercentage: {{ certificate_generator_service_autoscaling_targetCPUUtilizationPercentage|default(60) }}
+  targetMemoryUtilizationPercentage: {{ certificate_generator_service_autoscaling_targetMemoryUtilizationPercentage|default('') }}
+
