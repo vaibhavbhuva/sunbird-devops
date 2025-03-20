@@ -29,3 +29,22 @@ docker_service_stack_name: ui
 docker_service_name: "{{ service_ui_proxies_service }}"
 force_reload: "{{ force_reload_ui_proxies_service }}"
 host_bulk_upload: "{{ host_bulk_upload_path }}"
+
+ui_proxies_liveness_readiness:
+  healthcheck: true
+  readinessProbe:
+    httpGet:
+      path: /public/v8/liveness
+      port: 3003
+    initialDelaySeconds: 15
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 2
+  livenessProbe:
+    httpGet:
+      path: /public/v8/liveness
+      port: 3003
+    initialDelaySeconds: 15
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 2
