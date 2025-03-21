@@ -149,7 +149,7 @@ course_recommendation_prefix: /courseRecommendation
 chatbot_prefix: /chatbot
 nlp_prefix: /nlp
 thumbnail_service_prefix: /thumbnail
-
+certificate_generate_service_prefix: /certificate
 
 # Service URLs
 knowledge_mw_service_url: "http://knowledge-mw-service:5000"
@@ -201,6 +201,7 @@ cb_community_service_url : "http://cb-community-service:7001"
 course_recommendation_service_url : "http://course-recommendation-service:8000"
 nlp_search_service_url : "http://nlp-search-service:8000"
 thumbnail_service_url : "http://thumbnail-generation-service:8000"
+certificate_generator_service_url : "http://certificate-generator-service:9000"
 
 premium_consumer_rate_limits:
   - api: createContent
@@ -20449,6 +20450,24 @@ kong_apis:
       - name: rate-limiting
         config.policy: local
         config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ small_request_size_limit }}"
+
+  - name: dynamicCertificateGeneratorService
+    uris: "{{ certificate_generate_service_prefix }}/dynamic/v1/generate"
+    upstream_url: "{{ certificate_generator_service_url }}/v1/certs/generate"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'certificateCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ x_large_rate_limit_per_hour }}"
         config.limit_by: credential
       - name: request-size-limiting
         config.allowed_payload_size: "{{ small_request_size_limit }}"
