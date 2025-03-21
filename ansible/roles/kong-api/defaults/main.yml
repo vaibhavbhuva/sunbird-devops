@@ -20416,7 +20416,6 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
-
   - name: userPublicSearch
     uris: "{{ user_service_prefix }}/v5/public/search"
     upstream_url: "{{ learning_service_url }}/v5/user/public/search"
