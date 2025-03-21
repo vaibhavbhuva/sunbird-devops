@@ -20379,7 +20379,25 @@ kong_apis:
         config.limit_by: credential
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
-
+        
+  - name: getGlobalFeed
+    uris: "{{ discussionfeed_prefix }}/globalFeed"
+    upstream_url: "{{ cb_discussion_service_url }}/v1/discussion/globalFeed"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+        
   - name: userEventEnrollmentListByEventType
     uris: "{{ user_service_prefix }}/events/v2/list"
     upstream_url: "{{ lms_service_url }}/v2/user/events/list"
