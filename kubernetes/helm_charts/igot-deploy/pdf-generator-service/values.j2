@@ -26,7 +26,7 @@ strategy:
   maxsurge: {{ lms_maxsurge|default('25%') }}
   maxunavailable: {{ lms_maxunavailable|default('25%') }}
 
-###{{ pdf_generator_liveness_readiness | to_nice_yaml }}
+{{ pdf_generator_liveness_readiness | to_nice_yaml }}
 
 serviceMonitor:
   enabled: true

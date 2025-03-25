@@ -1,7 +1,14 @@
 server.port={{ application_port }}
-bolt.url={{ neo4j_url }}
-neo4j.authentication.username={{ neo4j_username }}
-neo4j.authentication.password={{ neo4j_password }}
 neo4j.maxlevel=4
 spring.redis.host={{ kp_redis_ip }}
 spring.redis.port=6379
+spring.neo4j.uri={{ neo4j_url }}
+
+spring.neo4j.authentication.username={{ neo4j_username }}
+spring.neo4j.authentication.password={{ neo4j_password }}
+# Connection Pooling
+spring.neo4j.pool.max-connection-pool-size=50
+spring.neo4j.pool.idle-time-before-connection-test=120s
+spring.neo4j.pool.max-connection-lifetime=30m
+
+spring.redis.client-type=lettuce
