@@ -26,7 +26,7 @@ strategy:
   maxsurge: {{ lms_maxsurge|default('25%') }}
   maxunavailable: {{ lms_maxunavailable|default('25%') }}
 
-###{{ sb_cb_ext_liveness_readiness | to_nice_yaml }}
+{{ sb_cb_ext_liveness_readiness | to_nice_yaml }}
 
 frac_backend_basepath: {{ frac_backend_basepath | default('/keys/') }}
 
