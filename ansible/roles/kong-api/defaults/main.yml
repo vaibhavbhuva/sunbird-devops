@@ -20419,7 +20419,7 @@ kong_apis:
 
   - name: listOfAllCommunitiesJoiedByUser
     uris: "{{ community_prefix }}/user/communities/all"
-    upstream_url: "{{ cb_community_service_url }}/user/communities/all"
+    upstream_url: "{{ cb_community_service_url }}/community/v1/user/communities/all"
     strip_uri: true
     plugins:
       - name: jwt
