@@ -133,6 +133,7 @@ comp_sub_theme_prefix : /competencySubTheme
 org_prefix : /org
 contentpartner_prefix: /contentpartner
 halloffame_prefix: /halloffame
+walloffame_prefix: /walloffame
 cqf_questionset_prefix: /cqfquestionset
 cqf_prefix: /cqf
 service_registry_prefix: /serviceregistry
@@ -10710,6 +10711,20 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
+  - name: walloffame
+    uris: "/walloffame/read"
+    upstream_url: "{{ sb_cb_ext_service_url }}/v1/walloffame/read"
+    strip_uri: true
+    plugins:
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
   - name: getPositionByOrg
     uris: "{{ master_data_service_prefix }}/v2/deptPosition"
     upstream_url: "{{ sb_cb_ext_service_url }}/masterData/v2/deptPosition"
@@ -12652,6 +12667,20 @@ kong_apis:
   - name: learnerleaderboard
     uris: "/halloffame/learnerleaderboard"
     upstream_url: "{{ sb_cb_ext_service_url }}/v1/halloffame/learnerleaderboard"
+    strip_uri: true
+    plugins:
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: learnerleaderboardwalloffame
+    uris: "/walloffame/learnerleaderboard"
+    upstream_url: "{{ sb_cb_ext_service_url }}/v1/walloffame/learnerleaderboard"
     strip_uri: true
     plugins:
       - name: cors
@@ -16450,6 +16479,24 @@ kong_apis:
       - name: request-size-limiting
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
+  - name: topTenlearner
+    uris: "/walloffame/top/learners"
+    upstream_url: "{{ sb_cb_ext_service_url }}/v1/top/learners"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'dataAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
   - name: ciosReadByExtId
     uris: "{{ cios_prefix }}/v1/content/readby/externalid"
     upstream_url: "{{ cb_pores_service_url }}/cios/v1/content/readby/externalid"
@@ -16759,6 +16806,24 @@ kong_apis:
     - name: request-size-limiting
       config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
+    - name: wallOfFameMdoLeaderBoard
+      uris: "{{ walloffame_prefix }}/v1/mdoleaderboard"
+      upstream_url: "{{ sb_cb_ext_service_url }}/v1/walloffame/mdoleaderboard"
+      strip_uri: true
+      plugins:
+        - name: jwt
+        - name: cors
+        - "{{ statsd_pulgin }}"
+        - name: acl
+          config.whitelist:
+            - 'dataAccess'
+        - name: rate-limiting
+          config.policy: local
+          config.hour: "{{ medium_rate_limit_per_hour }}"
+          config.limit_by: credential
+        - name: request-size-limiting
+          config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
   - name: hallOfFameUserLeaderBoard
     uris: "{{ halloffame_prefix }}/v1/userleaderboard"
     upstream_url: "{{ sb_cb_ext_service_url }}/v1/halloffame/user/read"
@@ -16776,6 +16841,24 @@ kong_apis:
       config.limit_by: credential
     - name: request-size-limiting
       config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: wallOfFameUserLeaderBoard
+    uris: "{{ walloffame_prefix }}/v1/userleaderboard"
+    upstream_url: "{{ sb_cb_ext_service_url }}/v1/walloffame/user/read"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'dataAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
   - name: surveysampletemplate
     uris: "{{ surveys_service_template_prefix }}/api/v1/download/sampleTemplate"
@@ -20276,6 +20359,24 @@ kong_apis:
   - name: hallOfFameStateMdoLeaderBoard
     uris: "{{ halloffame_prefix }}/v1/state/mdoleaderboard"
     upstream_url: "{{ sb_cb_ext_service_url }}/v1/halloffame/state/mdoleaderboard"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'dataAccess'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"
+
+  - name: wallOfFameStateMdoLeaderBoard
+    uris: "{{ walloffame_prefix }}/v1/state/mdoleaderboard"
+    upstream_url: "{{ sb_cb_ext_service_url }}/v1/walloffame/state/mdoleaderboard"
     strip_uri: true
     plugins:
       - name: jwt
