@@ -67,6 +67,7 @@
     "cb-discussion-service",
     "cb-community-service",
     "certificate-generator-service",
+    "report-generation-service",
     ]
 
 - name: helm upgrade

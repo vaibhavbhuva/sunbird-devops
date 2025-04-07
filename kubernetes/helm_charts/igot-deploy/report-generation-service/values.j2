@@ -26,6 +26,8 @@ strategy:
   maxsurge: {{ report_generation_maxsurge|default('25%') }}
   maxunavailable: {{ report_generation_maxunavailable|default('25%') }}
 
+frac_backend_basepath: {{ frac_backend_basepath | default('/keys/') }}
+
 
 serviceMonitor:
   enabled: true

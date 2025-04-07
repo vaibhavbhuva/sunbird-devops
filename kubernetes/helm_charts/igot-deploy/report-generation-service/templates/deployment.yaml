@@ -38,6 +38,19 @@ spec:
 {{ toYaml .Values.resources | indent 10 }}
         ports:
         - containerPort: {{ .Values.network.port }}
+        volumeMounts:
+{{- $keys := .Files.Glob "keys/*" }}
+{{- if $keys }}
+        - mountPath: {{ .Values.frac_backend_basepath }}
+          name: access-keys
+{{- end }}
+      volumes:
+{{- $keys := .Files.Glob "keys/*" }}
+{{- if $keys }}
+      - name: access-keys
+        secret:
+          secretName: report-generation-keys
+{{- end }}
 
 ---
 apiVersion: v1
