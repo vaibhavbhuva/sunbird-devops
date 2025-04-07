@@ -1,0 +1,44 @@
+### Default variable file for report_generation-service ###
+
+namespace: {{ namespace }}
+imagepullsecrets: {{ imagepullsecrets }}
+dockerhub: {{ docker_hub_url }}
+
+
+env:
+  javaoptions: {{report_generation_java_mem_limit|default('-Xmx600m')}}
+
+replicaCount: {{report_generation_replicacount|default(1)}}
+repository: {{ image_report_generation_service }}
+image_tag: {{ image_tag }}
+resources:
+  requests:
+    cpu: {{report_generation_cpu_req|default('200m')}}
+    memory: {{report_generation_mem_req|default('200Mi')}}
+  limits:
+    cpu: {{report_generation_cpu_limit|default('500m')}}
+    memory: {{report_generation_mem_limit|default('800Mi')}}
+network:
+  port: {{ service_report_generation_port }}
+  targetport: {{ service_report_generation_port }}
+strategy:
+  type: RollingUpdate
+  maxsurge: {{ report_generation_maxsurge|default('25%') }}
+  maxunavailable: {{ report_generation_maxunavailable|default('25%') }}
+
+frac_backend_basepath: {{ frac_backend_basepath | default('/keys/') }}
+
+
+serviceMonitor:
+  enabled: true
+  labels: # labels with which the prometheus choose the serviceMonitor
+    app: prometheus-operator
+    release: prometheus-operator
+
+autoscaling:
+  enabled: {{ report_generation_autoscaling_enabled | default('false') }}
+  minReplicas: {{ report_generation_autoscaling_minReplicas|default(1) }}
+  maxReplicas: {{ report_generation_autoscaling_maxReplicas|default(2) }}
+  targetCPUUtilizationPercentage: {{ report_generation_autoscaling_targetCPUUtilizationPercentage|default(60) }}
+  targetMemoryUtilizationPercentage: {{ report_generation_autoscaling_targetMemoryUtilizationPercentage|default('') }}
+

@@ -751,6 +751,7 @@ service_discussion_metaupdate_service: discussion-metaupdate-service
 service_nlp_search_service: nlp-search-service
 service_cb_org_hierarchy_service: cb-org-hierarchy-service
 service_certificate_generator_service: certificate-generator-service
+service_report_generation_service: report-generation-service
 
 # Ports
 service_bulk_upload_port: 3009
@@ -835,6 +836,7 @@ service_discussion_metaupdate_service_port: 7002
 service_nlp_search_port: 8000
 service_cb_org_hierarchy_port: 8888
 service_certificate_generator_port: 9000
+service_report_generation_port: 5000
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -902,6 +904,7 @@ network_alias_discussion_metaupdate_service: discussion-metaupdate-service
 network_alias_nlp_search_service: nlp-search-service
 network_alias_cb_org_hierarchy_service: cb-org-hierarchy-service
 network_alias_certificate_generator_service: certificate-generator-service
+network_alias_report_generation_service: report-generation-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -966,5 +969,6 @@ image_discussion_metaupdate_service: discussion-metaupdate-service
 image_nlp_search_service: nlp-search-service
 image_cb_org_hierarchy_service: cb-org-hierarchy-service
 image_certificate_generator_service: certificate-generator-service
+image_report_generation_service: report-generation-service
 #####################bulk-upload-spv#########
 host_bulk_upload: /mydata/bulk_upload
