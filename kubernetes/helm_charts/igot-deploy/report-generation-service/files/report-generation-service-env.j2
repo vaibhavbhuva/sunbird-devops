@@ -4,7 +4,7 @@ IS_VALIDATION_ENABLED=False
 postgres_db_port=postgresql_port
 postgres_db_user={{postgresql_username_sunbird}}
 postgres_db_password={{postgresql_password_sunbird}}
-postgres_db_name=warehose
+postgres_db_name={{postgresql_warehouse_db|default('warehose')}}
 postgres_db_host={{postgresql_warehouse_host}}
 accesstoken_publickey_basepath=/keys/
 
