@@ -9,7 +9,7 @@ env:
   javaoptions: {{cb_ext_assessment_service_java_mem_limit|default('-Xmx4096m')}}
 
 replicaCount: {{cb_ext_assessment_service_replicacount|default(1)}}
-repository: {{ image_cb_ext_assessment_service_service }}
+repository: {{ image_cb_ext_assessment_service }}
 image_tag: {{ image_tag }}
 resources:
   requests:
