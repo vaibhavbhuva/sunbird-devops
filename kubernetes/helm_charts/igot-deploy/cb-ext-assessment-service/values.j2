@@ -19,8 +19,8 @@ resources:
     cpu: {{ cb_ext_assessment_service_cpu_limit|default('2')}}
     memory: {{cb_ext_assessment_service_mem_limit|default('6144Mi')}}
 network:
-  port: {{ service_cb_ext_assessment_service_port }}
-  targetport: {{ service_cb_ext_assessment_service_port }}
+  port: {{ service_cb_ext_assessment_port }}
+  targetport: {{ service_cb_ext_assessment_port }}
 strategy:
   type: RollingUpdate
   maxsurge: {{ lms_maxsurge|default('25%') }}
