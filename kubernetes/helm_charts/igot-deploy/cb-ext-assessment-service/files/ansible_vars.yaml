@@ -15,7 +15,7 @@ compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name 
 user_friendly_name: cb-ext-assessment service
 
 # For service
-application_port: "{{ service_sb_cb_ext_port }}"
+application_port: "{{ service_cb_ext_assessment_port }}"
 image_name: "{{ image_cb_ext_assessment_service }}"
 tag: "{{ tags_cb_ext_assessment_service }}"
 host_port: "{{ application_port }}"
@@ -29,25 +29,6 @@ network_alias_name: "{{ network_alias_cb_ext_assessment_service }}"
 docker_service_stack_name: lms
 docker_service_name: "{{ service_cb_ext_assessment_service }}"
 force_reload: "{{ force_reload_cb_ext_assessment_service }}"
-
-sb_cb_ext_liveness_readiness:
-  healthcheck: true
-  readinessProbe:
-    httpGet:
-      path: /liveness
-      port: 7001
-    initialDelaySeconds: 30
-    periodSeconds: 30
-    timeoutSeconds: 15
-    failureThreshold: 2
-  livenessProbe:
-    httpGet:
-      path: /liveness
-      port: 7001
-    initialDelaySeconds: 30
-    periodSeconds: 30
-    timeoutSeconds: 15
-    failureThreshold: 2
 
 # For application
 server_connection_timeout: 5000
