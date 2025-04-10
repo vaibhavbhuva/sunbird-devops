@@ -68,6 +68,7 @@
     "cb-community-service",
     "certificate-generator-service",
     "report-generation-service",
+    "cb-ext-assessment-service",
     ]
 
 - name: helm upgrade
