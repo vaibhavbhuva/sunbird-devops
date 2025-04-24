@@ -26,7 +26,6 @@ strategy:
   maxsurge: {{ comment_tree_maxsurge|default('25%') }}
   maxunavailable: {{ comment_tree_maxunavailable|default('25%') }}
 
-###{{ comment_tree_liveness_readiness | to_nice_yaml }}
 
 comment_tree_backend_basepath: {{ comment_tree_backend_basepath | default('/keys/') }}
 
