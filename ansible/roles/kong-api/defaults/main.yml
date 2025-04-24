@@ -151,6 +151,7 @@ chatbot_prefix: /chatbot
 nlp_prefix: /nlp
 thumbnail_service_prefix: /thumbnail
 certificate_generate_service_prefix: /certificate
+comment_tree_prefix: /commentTree
 
 # Service URLs
 knowledge_mw_service_url: "http://knowledge-mw-service:5000"
@@ -204,6 +205,7 @@ nlp_search_service_url : "http://nlp-search-service:8000"
 thumbnail_service_url : "http://thumbnail-generation-service:8000"
 cb_ext_assessment_service_url: "http://cb-ext-assessment-service:7002"
 certificate_generator_service_url : "http://certificate-generator-service:9000"
+comment_tree_service_url: "http://comment-tree-service:8098"
 
 premium_consumer_rate_limits:
   - api: createContent
@@ -20912,3 +20914,21 @@ kong_apis:
         config.limit_by: credential
       - name: request-size-limiting
         config.allowed_payload_size: "{{ x_large_request_size_limit }}"
+
+  - name: commentTreeGet
+    uris: "{{ comment_prefix }}/v1/get"
+    upstream_url: "{{ cb_comment_service_url }}/commentTree/v1/get"
+    strip_uri: true
+    plugins:
+      - name: jwt
+      - name: cors
+      - "{{ statsd_pulgin }}"
+      - name: acl
+        config.whitelist:
+          - 'contentCreate'
+      - name: rate-limiting
+        config.policy: local
+        config.hour: "{{ medium_rate_limit_per_hour }}"
+        config.limit_by: credential
+      - name: request-size-limiting
+        config.allowed_payload_size: "{{ medium_request_size_limit }}"        
