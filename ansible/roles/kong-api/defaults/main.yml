@@ -20917,7 +20917,7 @@ kong_apis:
 
   - name: commentTreeGet
     uris: "{{ comment_prefix }}/v1/get"
-    upstream_url: "{{ cb_comment_service_url }}commentTree/v1/get"
+    upstream_url: "{{ cb_comment_service_url }}/commentTree/v1/get"
     strip_uri: true
     plugins:
       - name: jwt
