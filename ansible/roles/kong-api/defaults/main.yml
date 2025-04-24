@@ -151,7 +151,7 @@ chatbot_prefix: /chatbot
 nlp_prefix: /nlp
 thumbnail_service_prefix: /thumbnail
 certificate_generate_service_prefix: /certificate
-comment_tree_prefix: commentTree/v1
+comment_tree_prefix: /commentTree
 
 # Service URLs
 knowledge_mw_service_url: "http://knowledge-mw-service:5000"
@@ -20916,7 +20916,7 @@ kong_apis:
         config.allowed_payload_size: "{{ x_large_request_size_limit }}"
 
   - name: commentTreeGet
-    uris: "{{ comment_prefix }}/get"
+    uris: "{{ comment_prefix }}/v1/get"
     upstream_url: "{{ cb_comment_service_url }}commentTree/v1/get"
     strip_uri: true
     plugins:
