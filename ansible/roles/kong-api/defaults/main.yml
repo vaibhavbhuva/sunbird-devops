@@ -20878,7 +20878,7 @@ kong_apis:
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
   - name: PrivateContentUpdateAPI
-    uris: "private/content/v4/update"
+    uris: "{{ private_content_prefix }}/v4/update"
     upstream_url: "{{ content_service_url }}/content/v4/update"
     strip_uri: true
     plugins:
@@ -20896,7 +20896,7 @@ kong_apis:
         config.allowed_payload_size: "{{ x_large_request_size_limit }}"
 
   - name: PrivateContentSystemUpdateAPI
-    uris: "private/content/v4/system/update"
+    uris: "{{ private_content_prefix }}/v4/system/update"
     upstream_url: "{{ content_service_url }}/content/v4/system/update"
     strip_uri: true
     plugins:
