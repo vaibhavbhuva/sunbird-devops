@@ -20916,8 +20916,8 @@ kong_apis:
         config.allowed_payload_size: "{{ x_large_request_size_limit }}"
 
   - name: commentTreeGet
-    uris: "{{ comment_prefix }}/v1/get"
-    upstream_url: "{{ cb_comment_service_url }}/commentTree/v1/get"
+    uris: "{{ comment_tree_prefix }}/v1/get"
+    upstream_url: "{{ comment_tree_service_url }}/commentTree/v1/get"
     strip_uri: true
     plugins:
       - name: jwt
