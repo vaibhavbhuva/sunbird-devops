@@ -2,7 +2,7 @@
   file: path={{ qdrant_backup_dir }} state=directory recurse=yes
   
 -   set_fact:
-    qdrant_backup_name: "qdrant_backup_{{ lookup('pipe', 'date +%Z-%Y-%m-%d-%H-%M-%S') }}"
+      qdrant_backup_name: "qdrant_backup_{{ lookup('pipe', 'date +%Z-%Y-%m-%d-%H-%M-%S') }}"
 
 - set_fact:
     qdrant_backup_file_name: "{{ qdrant_backup_name }}.tar.gz"
