@@ -21026,8 +21026,8 @@ kong_apis:
         config.allowed_payload_size: "{{ medium_request_size_limit }}"
 
   - name: commentV3Search
-    uris: "{{ comment_prefix }}/search/v3"
-    upstream_url: "{{ cb_comment_service_url }}/comment/search/v3"
+    uris: "{{ comment_prefix }}/v3/search"
+    upstream_url: "{{ cb_comment_service_url }}/comment/v3/search"
     strip_uri: true
     plugins:
       - name: jwt
