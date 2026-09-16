@@ -154,7 +154,7 @@ enrolment.dictionary.url=/v1/user/enrol/dictionary
 lms.host=http://lms-service:9000/
 moderated.course.search.request={"request":{"filters":{"contentType":["Course"],"courseCategory":["Moderated Course","Moderated Program","Moderated Assessment"],"status":["Live"],"secureSettings.organisation":"%s"},"fields":["identifier"],"sort_by":{"createdOn":"desc"}}}
 
-org.eligibility.elasticsearch.host={{ sb_es_host }}
+org.eligibility.elasticsearch.host={{ elasticsearch_http_hosts_list }}
 org.eligibility.elasticsearch.port={{ sb_es_port }}
 org.eligibility.elasticsearch.username={{ sb_es_username }}
 org.eligibility.elasticsearch.password={{ sb_es_password }}
