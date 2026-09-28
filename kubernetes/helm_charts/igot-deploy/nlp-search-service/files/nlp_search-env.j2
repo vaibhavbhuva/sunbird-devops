@@ -16,7 +16,8 @@ WEB_CONCURRENCY={{ nlp_web_concurrency | default('1') }}
 
 REDIS_ENABLED=true
 REDIS_HOST={{ nlpsearch_redis_host }}
-REDIS_PORT=6379
+REDIS_PORT={{redis_port}}
+REDIS_PASSWORD=
 REDIS_SSL=false
 REDIS_DB=0
 REDIS_KEY_PREFIX=nlpsearch
