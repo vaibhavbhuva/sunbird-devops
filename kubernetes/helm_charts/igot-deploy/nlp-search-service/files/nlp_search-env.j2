@@ -13,3 +13,11 @@ NLP_SEARCH_INSTRUCTION_PROMPT="find keywords from the text within square braces.
 NPL_SEARCH_EXAMPLE_PROMPT="]\nExample: \n Query: find courses related to data mining, software architecture and AI \n Response: {\\"keywords\\" : [{\\"keyword\\" : \\"data mining\\", \\"priority\\":1}, {\\"keyword\\" : \\"software architecture\\", \\"priority\\":2}, {\\"keyword\\" : \\"AI\\", \\"priority\\":3}]} \n \n Query: Course 19th Jan \n Response: {\\"keywords\\" : [{\\"keyword\\" : \\"Course 19th Jan\\", \\"priority\\":1}]} \n\n Query: Vikshit_bharat-course-2025 \n Response: {\\"keywords\\" : [{\\"keyword\\" : \\"Vikshit_bharat-course-2025\\", \\"priority\\":1}]} \n\n Query: course by manohar kumar author\n Response: {\\"keywords\\" : [{\\"keyword\\" : \\"manohar kumar\\", \\"priority\\":1}]} \n\n Query: Curated Prg - Ivoryf Schuppea\n Response: {\\"keywords\\" : [{\\"keyword\\" : \\"Curated Prg - Ivoryf Schuppea\\", \\"priority\\":1}]} \n Answer:"
 
 WEB_CONCURRENCY={{ nlp_web_concurrency | default('1') }}
+
+REDIS_ENABLED=true
+REDIS_HOST={{ nlpsearch_redis_host }}
+REDIS_PORT=6379
+REDIS_DB=0
+REDIS_KEY_PREFIX=nlpsearch
+REDIS_CACHE_TTL_DAYS=10
+REDIS_QUERY_COUNTER_ENABLED=true
