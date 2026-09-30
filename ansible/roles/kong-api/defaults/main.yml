@@ -23891,6 +23891,7 @@ kong_apis:
       - name: acl
         config.whitelist:
           - 'contentCreate'
+          - itsmAuroraAccess
       - name: rate-limiting
         config.policy: local
         config.hour: "{{ x2_large_rate_limit_per_hour }}"
